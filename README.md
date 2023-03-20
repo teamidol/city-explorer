@@ -3,6 +3,7 @@
 City Explorer
 
 **Author**: Laurence
+
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
@@ -12,7 +13,7 @@ This project grabs API and applies it to a map.
 Must request for API.  
 
 ## Architecture
-This uses javascript to render API information.
+This uses javascript to grab API data from an API server and apply that data in an application.
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
