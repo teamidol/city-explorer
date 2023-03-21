@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lonLat: [],
+      // lonLat: [],
       city: '',
       cityData: {},
       error: false,
