@@ -22,15 +22,15 @@ class App extends React.Component {
     })
   }
 
-  getWeatherData = async () => {
-    
+  handSubmit = async (e) => {
+    e.preventDefault();
     
     try {
-      let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}`
+      let url = `${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.city}`
 
-      let weatherData = await axios.get(url);
+      let cityData = await axios.get(url);
 
-      console.log(weatherData.data);
+      console.log(cityData.data);
     } catch (error) {
       console.log(error.message);
     } 
@@ -43,7 +43,7 @@ class App extends React.Component {
 
     try {
       // TODO: Use axios to get the data from LocationIQ - using city in state
-      let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`
+      let url = `https://us1.locationiq.com/v1/search?key=${process.env.LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`
 
       let cityDataFromAxios = await axios.get(url);
 
@@ -52,11 +52,9 @@ class App extends React.Component {
       // TODO: Set State with the data that comes back from axios & set error boolean to false
       this.setState({
         cityData: cityDataFromAxios.data[0],
-        mapUrl: `https://maps.locationiq.comv3staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${cityDataFromAxios.data[0].lat},${cityDataFromAxios.data[0].lon}&zoom=13`,
+        mapUrl: `https://maps.locationiq.comv3staticmap?key=${process.env.LOCATIONIQ_API_KEY}&center=${cityDataFromAxios.data[0].lat},${cityDataFromAxios.data[0].lon}&zoom=13`,
         error: false
       });
-
-  this.getWeatherData();
 
     } catch (error) {
 
@@ -91,7 +89,7 @@ class App extends React.Component {
             : Object.keys(this.state.cityData).length > 0 &&
             <ul>
               <p id="title">{this.state.cityData.display_name}</p>
-              <Image class="img-fluid" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=13`} alt='Map of location' />
+              <Image class="img-fluid" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=13`} alt='Map of location' />
               <p>{this.state.cityData.lon}</p>
               <p>{this.state.cityData.lat}</p>
             </ul>
